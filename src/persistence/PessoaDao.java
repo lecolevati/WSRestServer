@@ -13,7 +13,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-public class PessoaDao {
+public class PessoaDao implements IPessoaDao {
 
 	MongoDatabase db;
 
