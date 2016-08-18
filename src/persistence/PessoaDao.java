@@ -47,7 +47,7 @@ public class PessoaDao implements IPessoaDao {
 		}
 		return lista;
 	}
-
+	
 	public Pessoa consultaPessoa(int id) {
 		final List<Pessoa> lista = new ArrayList<Pessoa>();
 		FindIterable<Document> it = db.getCollection("pessoa").find(

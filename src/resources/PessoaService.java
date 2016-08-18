@@ -17,17 +17,28 @@ import persistence.PessoaDao;
 
 import com.google.gson.Gson;
 
-@Path("/Pessoas")
-public class PessoasResources {
+@Path("/pessoas")
+public class PessoaService {
 
+	@Path("/incluir")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String inserirPessoa(String JSONPessoa) {
+		PessoaDao pDao = new PessoaDao();
+		pDao.inserePessoa(JSONPessoa);
+		return "Inserido com sucesso !";
+	}
+	
+	@Path("/consulta")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String consultaPessoa() {
+	public String consultaPessoas() {
 		Gson gson = new Gson();
 		return gson.toJson(new PessoaDao().consultaPessoas());
 	}
 
-	@Path("/consultaPessoa/{id}")
+	@Path("/{id}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response consultaPessoaPorId(@PathParam("id") int id) {
@@ -40,17 +51,7 @@ public class PessoasResources {
 		}
 	}
 
-	@Path("/incluiPessoa")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String inserirPessoa(String JSONPessoa) {
-		PessoaDao pDao = new PessoaDao();
-		pDao.inserePessoa(JSONPessoa);
-		return "Inserido com sucesso !";
-	}
-
-	@Path("/atualizaPessoa")
+	//@Path("/atualizaPessoa")
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
@@ -62,7 +63,8 @@ public class PessoasResources {
 		return "Atualizado com sucesso !";
 	}
 
-	@Path("/deletaPessoa/{id}")
+	//@Path("/deletaPessoa/{id}")
+	@Path("/{id}")
 	@DELETE
 	@Produces(MediaType.TEXT_PLAIN)
 	public String excluiPessoa(@PathParam("id") int id) {
